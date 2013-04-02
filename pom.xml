@@ -11,7 +11,7 @@
 
     <groupId>org.hudsonci.plugins</groupId>
     <artifactId>xunit</artifactId>
-    <version>1.53-h-1</version>
+    <version>1.53-h-2-SNAPSHOT</version>
     <packaging>hpi</packaging>
     <name>xUnit plugin</name>
     <description>xUnit plugin</description>
