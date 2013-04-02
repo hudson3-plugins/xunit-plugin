@@ -29,8 +29,8 @@ import com.thalesgroup.dtkit.metrics.hudson.model.BoostTestHudsonTestType;
 @SuppressWarnings("unused")
 public class BoostTestType extends XUnitType {
 
-    public BoostTestType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(pattern, faildedIfNotNew, deleteJUnitFiles);
+    public BoostTestType(String pattern, boolean failIfNotNew, boolean deleteJUnitFiles) {
+        super(pattern, failIfNotNew, deleteJUnitFiles);
     }
 
     public TestTypeDescriptor getDescriptor() {
@@ -43,7 +43,7 @@ public class BoostTestType extends XUnitType {
      * @return an new hudson object
      */
     public Object readResolve() {
-        return new BoostTestHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
+        return new BoostTestHudsonTestType(this.getPattern(), this.isFailIfNotNew(), this.isDeleteJUnitFiles());
     }
 
 }

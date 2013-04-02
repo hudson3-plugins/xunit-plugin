@@ -11,18 +11,18 @@ import org.kohsuke.stapler.DataBoundConstructor;
 /**
  * @author Gregory Boissinot
  */
-public class CheckType extends TestType {
+public class QTestLibType extends TestType {
 
     @DataBoundConstructor
-    public CheckType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+    public QTestLibType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
         super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
     }
 
     @Extension
-    public static class CheckTypeDescriptor extends TestTypeDescriptor<CheckType> {
+    public static class QTestLibTypeDescriptor extends TestTypeDescriptor<QTestLibType> {
 
-        public CheckTypeDescriptor() {
-            super(CheckType.class, null);
+        public QTestLibTypeDescriptor() {
+            super(QTestLibType.class, null);
         }
 
         @Override
@@ -33,10 +33,11 @@ public class CheckType extends TestType {
         @Override
         public InputMetric getInputMetric() {
             try {
-                return InputMetricFactory.getInstance(CheckInputMetric.class);
+                return InputMetricFactory.getInstance(QTestLibInputMetric.class);
             } catch (InputMetricException e) {
-                throw new RuntimeException("Can't create the inputMetric object for the class " + CheckInputMetric.class);
+                throw new RuntimeException("Can't create the inputMetric object for the class " + QTestLibInputMetric.class);
             }
         }
     }
 }
+

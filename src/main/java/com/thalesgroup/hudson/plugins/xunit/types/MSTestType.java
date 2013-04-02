@@ -29,8 +29,8 @@ import com.thalesgroup.dtkit.metrics.hudson.model.MSTestHudsonTestType;
 @SuppressWarnings("unused")
 public class MSTestType extends XUnitType {
 
-    public MSTestType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(pattern, faildedIfNotNew, deleteJUnitFiles);
+    public MSTestType(String pattern, boolean failIfNotNew, boolean deleteJUnitFiles) {
+        super(pattern, failIfNotNew, deleteJUnitFiles);
     }
 
     public TestTypeDescriptor getDescriptor() {
@@ -43,6 +43,6 @@ public class MSTestType extends XUnitType {
      * @return an new hudson object
      */
     public Object readResolve() {
-        return new MSTestHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
+        return new MSTestHudsonTestType(this.getPattern(), this.isFailIfNotNew(), this.isDeleteJUnitFiles());
     }
 }

@@ -29,8 +29,8 @@ import com.thalesgroup.dtkit.metrics.hudson.model.FPCUnitHudsonTestType;
 @SuppressWarnings("unused")
 public class FPCUnitType extends XUnitType {
 
-    public FPCUnitType(String pattern, boolean faildedIfNotNew, boolean deleteJUnitFiles) {
-        super(pattern, faildedIfNotNew, deleteJUnitFiles);
+    public FPCUnitType(String pattern, boolean failIfNotNew, boolean deleteJUnitFiles) {
+        super(pattern, failIfNotNew, deleteJUnitFiles);
     }
 
     public TestTypeDescriptor getDescriptor() {
@@ -43,6 +43,6 @@ public class FPCUnitType extends XUnitType {
      * @return an new hudson object
      */
     public Object readResolve() {
-        return new FPCUnitHudsonTestType(this.getPattern(), this.isFaildedIfNotNew(), this.isDeleteJUnitFiles());
+        return new FPCUnitHudsonTestType(this.getPattern(), this.isFailIfNotNew(), this.isDeleteJUnitFiles());
     }
 }

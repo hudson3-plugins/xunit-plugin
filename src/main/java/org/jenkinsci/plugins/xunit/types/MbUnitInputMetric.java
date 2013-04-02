@@ -8,7 +8,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 /**
  * @author Gregory Boissinot
  */
-public class CheckInputMetric extends InputMetricXSL {
+public class MbUnitInputMetric extends InputMetricXSL {
 
     @Override
     public InputType getToolType() {
@@ -17,12 +17,12 @@ public class CheckInputMetric extends InputMetricXSL {
 
     @Override
     public String getToolVersion() {
-        return "Version N/A";
+        return "2.4";
     }
 
     @Override
     public String getToolName() {
-        return "Check";
+        return "MbUnit";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CheckInputMetric extends InputMetricXSL {
 
     @Override
     public String getXslName() {
-        return "check-to-junit-4.xsl";
+        return "mbunit-to-junit-4.xsl";
     }
 
     @Override

@@ -11,18 +11,18 @@ import org.kohsuke.stapler.DataBoundConstructor;
 /**
  * @author Gregory Boissinot
  */
-public class CheckType extends TestType {
+public class MbUnitType extends TestType {
 
     @DataBoundConstructor
-    public CheckType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
+    public MbUnitType(String pattern, boolean failIfNotNew, boolean deleteOutputFiles, boolean stopProcessingIfError) {
         super(pattern, failIfNotNew, deleteOutputFiles, stopProcessingIfError);
     }
 
     @Extension
-    public static class CheckTypeDescriptor extends TestTypeDescriptor<CheckType> {
+    public static class MbUnitTypeDescriptor extends TestTypeDescriptor<MbUnitType> {
 
-        public CheckTypeDescriptor() {
-            super(CheckType.class, null);
+        public MbUnitTypeDescriptor() {
+            super(MbUnitType.class, null);
         }
 
         @Override
@@ -33,10 +33,11 @@ public class CheckType extends TestType {
         @Override
         public InputMetric getInputMetric() {
             try {
-                return InputMetricFactory.getInstance(CheckInputMetric.class);
+                return InputMetricFactory.getInstance(MbUnitInputMetric.class);
             } catch (InputMetricException e) {
-                throw new RuntimeException("Can't create the inputMetric object for the class " + CheckInputMetric.class);
+                throw new RuntimeException("Can't create the inputMetric object for the class " + MbUnitInputMetric.class);
             }
         }
     }
 }
+

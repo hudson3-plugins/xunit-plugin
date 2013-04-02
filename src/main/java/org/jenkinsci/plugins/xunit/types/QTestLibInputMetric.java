@@ -8,7 +8,7 @@ import com.thalesgroup.dtkit.metrics.model.OutputMetric;
 /**
  * @author Gregory Boissinot
  */
-public class CheckInputMetric extends InputMetricXSL {
+public class QTestLibInputMetric extends InputMetricXSL {
 
     @Override
     public InputType getToolType() {
@@ -22,17 +22,17 @@ public class CheckInputMetric extends InputMetricXSL {
 
     @Override
     public String getToolName() {
-        return "Check";
+        return "QTestlib";
     }
 
     @Override
     public boolean isDefault() {
-        return true;
+        return false;
     }
 
     @Override
     public String getXslName() {
-        return "check-to-junit-4.xsl";
+        return "qtestlib-to-junit-4.xsl";
     }
 
     @Override

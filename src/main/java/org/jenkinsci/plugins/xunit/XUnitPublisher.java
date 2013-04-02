@@ -20,6 +20,7 @@ import hudson.tasks.junit.JUnitResultArchiver;
 import hudson.tasks.junit.TestResult;
 import hudson.tasks.junit.TestResultAction;
 import hudson.tasks.test.TestResultProjectAction;
+import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.types.FileSet;
@@ -191,7 +192,7 @@ public class XUnitPublisher extends Recorder implements DryRun, Serializable {
                 new FilePath(new File(Hudson.getInstance().getRootDir(), "userContent")),
                 tool.getInputMetric(),
                 expandedPattern,
-                tool.isFaildedIfNotNew(),
+                tool.isFailIfNotNew(),
                 tool.isDeleteOutputFiles(), tool.isStopProcessingIfError(),
                 build.getTimeInMillis(),
                 (tool instanceof CustomType) ? getWorkspace(build).child(((CustomType) tool).getCustomXSL()) : null);
@@ -287,7 +288,10 @@ public class XUnitPublisher extends Recorder implements DryRun, Serializable {
 
                 public TestResult invoke(File ws, VirtualChannel channel) throws IOException {
                     final long nowSlave = System.currentTimeMillis();
-                    FileSet fs = Util.createFileSet(new File(ws, GENERATED_JUNIT_DIR), junitFilePattern);
+                    File generatedJunitDir = new File(ws, GENERATED_JUNIT_DIR);
+                    //Try to create the file if it was deleted or something was wrong
+                    generatedJunitDir.mkdirs();
+                    FileSet fs = Util.createFileSet(generatedJunitDir, junitFilePattern);
                     DirectoryScanner ds = fs.getDirectoryScanner();
                     String[] files = ds.getIncludedFiles();
 
@@ -435,7 +439,13 @@ public class XUnitPublisher extends Recorder implements DryRun, Serializable {
                     req, formData, "tools", getListXUnitTypeDescriptors());
             List<XUnitThreshold> thresholds = Descriptor.newInstancesFromHeteroList(
                     req, formData, "thresholds", getListXUnitThresholdDescriptors());
-            int thresholdMode = formData.getInt("thresholdMode");
+            int thresholdMode = 0;
+            try{
+                thresholdMode = formData.getInt("thresholdMode");
+            }
+            catch (JSONException e){
+                //ignore
+            }
             return new XUnitPublisher(types.toArray(new TestType[types.size()]), thresholds.toArray(new XUnitThreshold[thresholds.size()]), thresholdMode);
         }
     }
